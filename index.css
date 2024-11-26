@@ -30,7 +30,8 @@
 }
 
 body {
-  margin: var(--spacing-4x);
+  margin: 0;
+  padding: var(--spacing-4x);
 }
 
 .navbar {
@@ -43,7 +44,9 @@ body {
 .navbar__logo {
   object-fit: contain;
   width: 50px;
-  height: auto;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .navbar-menu {
@@ -69,6 +72,10 @@ body {
   padding-left: var(--spacing-4x);
   padding-bottom: var(--spacing-8x);
   font-size: 1.5rem;
+  &:hover {
+    color: var(--soft-red);
+    cursor: pointer;
+  }
 }
 
 .navbar-menu__close-btn {
@@ -77,12 +84,17 @@ body {
   padding-right: var(--spacing-5x);
   padding-top: var(--spacing-8x);
   padding-bottom: calc(30 * var(--spacing-1x));
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .navbar__burger-btn {
   object-fit: contain;
   width: 40px;
-  height: auto;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .main-article__image {
@@ -91,10 +103,10 @@ body {
 
 .main-article__header {
   font-weight: var(--weight-bolder);
-  font-size: 2.7rem;
+  font-size: 2.9rem;
   color: var(--very-dark-blue);
   margin: 0;
-  margin-top: var(--spacing-2x);
+  margin-top: var(--spacing-5x);
   line-height: 0.95;
 }
 
@@ -110,13 +122,14 @@ body {
   font-size: 1rem;
   background-color: var(--soft-red);
   border: 0;
-  padding-left: var(--spacing-7x);
-  padding-right: var(--spacing-7x);
-  padding-top: var(--spacing-4x);
-  padding-bottom: var(--spacing-4x);
+  padding: var(--spacing-4x) var(--spacing-7x);
   margin-top: var(--spacing-2x);
   letter-spacing: 2px;
   color: var(--very-dark-blue);
+  &:hover {
+    color: var(--off-white);
+    cursor: pointer;
+  }
 }
 
 .article-list {
@@ -153,6 +166,10 @@ body {
   font-weight: var(--weight-bold);
   margin: 0;
   margin-bottom: var(--spacing-1x);
+  &:hover {
+    color: var(--soft-red);
+    cursor: pointer;
+  }
 }
 
 .article-item__text {
@@ -171,21 +188,26 @@ body {
 
 .gallery-item {
   display: grid;
-  grid-template-areas: "img num" "img header" "img text-area";
-  grid-template-columns: 30% auto;
+  grid-template-areas:
+    "gallery-img gallery-num"
+    "gallery-img gallery-header"
+    "gallery-img gallery-text";
+  grid-template-columns: 30% 1fr;
   grid-template-rows: auto auto auto;
-  gap: var(--spacing-6x);
-  margin-bottom: var(--spacing-5x);
+  column-gap: var(--spacing-5x);
+  row-gap: var(--spacing-1x);
+  margin-bottom: var(--spacing-6x);
 }
 
 .gallery-item__img {
-  grid-area: img;
+  grid-area: gallery-img;
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
 .gallery-item__numeration {
+  grid-area: gallery-num;
   color: var(--soft-red);
   font-weight: var(--weight-bolder);
   font-size: 2rem;
@@ -193,15 +215,19 @@ body {
   padding: 0;
 }
 .gallery-item__header {
-  grid-area: header;
+  grid-area: gallery-header;
   color: var(--very-dark-blue);
   font-weight: var(--weight-bolder);
   font-size: 1.2rem;
   margin: 0;
   padding: 0;
+  &:hover {
+    color: var(--soft-red);
+    cursor: pointer;
+  }
 }
 .gallery-item__text {
-  grid-area: text-area;
+  grid-area: gallery-text;
   color: var(--dark-grayish-blue);
   font-weight: var(--weight-normal);
   font-size: 1rem;
@@ -212,11 +238,157 @@ body {
 
 @media screen and (min-width: 376px) {
   :root {
-    --spacing-1x: 4px;
+    --spacing-1x: 6px;
   }
-  * {
-    background-color: red;
+
+  body {
+    max-width: 800px;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: min-content max-content min-content;
+    column-gap: var(--spacing-3x);
+    row-gap: var(--spacing-8x);
+    grid-template-areas:
+      "body-nav"
+      "body-main-article"
+      "body-article-list"
+      "body-gallery-list";
+  }
+
+  .main-article__image {
+    content: url("./assets/images/image-web-3-desktop.jpg");
+    width: 100%;
   }
 }
 @media screen and (min-width: 1441px) {
+  :root {
+    --spacing-1x: 10px;
+  }
+  body {
+    max-width: 1300px;
+    grid-template-columns: 65% 1fr;
+    grid-template-areas:
+      "body-nav          body-nav"
+      "body-main-article body-article-list"
+      "body-gallery-list body-gallery-list";
+  }
+
+  .navbar {
+    grid-area: body-nav;
+    padding-top: var(--spacing-3x);
+    padding-bottom: 0;
+  }
+  .navbar-menu {
+    position: static;
+    display: block;
+    flex-direction: column;
+    height: auto;
+    width: auto;
+    &::before {
+      display: none;
+    }
+  }
+  .navbar-menu__item {
+    font-size: 1.3rem;
+  }
+  .navbar-menu__close-btn {
+    display: none;
+  }
+
+  .navbar__burger-btn {
+    display: none;
+  }
+  .main-article {
+    grid-area: body-main-article;
+    display: grid;
+    grid-template-columns: auto 50%;
+    column-gap: var(--spacing-4x);
+    row-gap: var(--spacing-4x);
+    grid-template-rows: min-content max-content min-content;
+    grid-template-areas:
+      "article-image article-image"
+      "article-header article-text"
+      "article-header article-button";
+  }
+  .main-article__image {
+    grid-area: article-image;
+  }
+
+  .main-article__header {
+    grid-area: article-header;
+    font-size: 4.5rem;
+    margin-top: 0;
+  }
+
+  .main-article__text {
+    grid-area: article-text;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+  }
+
+  .main-article__btn {
+    grid-area: article-button;
+    margin: 0;
+    padding: var(--spacing-2x);
+    padding-left: var(--spacing-4x);
+    padding-right: var(--spacing-4x);
+    width: max-content;
+    height: min-content;
+  }
+
+  .article-list {
+    grid-area: body-article-list;
+    margin: 0;
+  }
+  .article-list__header {
+    margin-top: var(--spacing-2x);
+    margin-bottom: var(--spacing-3x);
+  }
+  .article-item {
+    padding-bottom: var(--spacing-3x);
+    margin-bottom: var(--spacing-3x);
+  }
+  .article-item__header {
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .article-item__text {
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+
+  .gallery-list {
+    grid-area: body-gallery-list;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .gallery-item {
+    column-gap: var(--spacing-2x);
+    margin: 0;
+    row-gap: 0;
+    max-width: 30%;
+    height: max-content;
+  }
+
+  .gallery-item__img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+  .gallery-item__header {
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .gallery-item__text {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    display: flex;
+    align-items: end;
+  }
 }
