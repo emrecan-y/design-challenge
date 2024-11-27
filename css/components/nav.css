@@ -66,13 +66,14 @@
 @media screen and (min-width: 1440px) {
   .navbar {
     grid-area: body-nav;
+    display: flex;
     padding-top: var(--spacing-3x);
     padding-bottom: 0;
   }
   .navbar-menu {
     position: static;
-    display: block;
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
     height: auto;
     width: auto;
     &::before {
@@ -81,6 +82,7 @@
   }
   .navbar-menu__item {
     font-size: 1.3rem;
+    padding-bottom: 0;
   }
   .navbar-menu__close-btn {
     display: none;

@@ -1,6 +1,12 @@
+var desktopView = window.matchMedia("(min-width: 1440px)");
+let menu = document.getElementsByClassName("navbar-menu");
+
+desktopView.addEventListener("change", () => {
+  menu[0].style.display = "";
+});
+
 function toggleBurgerMenu() {
-  let menu = document.getElementsByClassName("navbar-menu");
-  if (menu[0].style.display === "none") {
+  if (menu[0].style.display === "none" || menu[0].style.display === "") {
     menu[0].style.display = "flex";
   } else {
     menu[0].style.display = "none";
